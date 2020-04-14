@@ -42,3 +42,8 @@ def delete(request,id):
     item.delete()
     messages.warning(request,'item deleted')
     return redirect('/item')
+
+
+def itemdetails(request,id):
+    item = Item.objects.get(id= id)
+    return render(request,'itemdetails.html',{'item':item})

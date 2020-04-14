@@ -12,7 +12,7 @@
         <h1>{{item.name}}</h1>
         <p class="price">{{item.cost}}</p>
         <p>{{item.description}}</p>
-        <p><button>View Details</button></p>
+          <a style="item-align:center" class="btn btn-primary btn-block" href="{% url 'itemdetails' id=item.id %}">View Details</a>
       </div>
     </div>
 </div>
