@@ -1,0 +1,57 @@
+.layout{
+            width:40%;
+		    margin:10vh auto 0 auto;
+		    background-color:#a8e0b66e;
+		    color: #6f062a;
+		    font-family: cursive;
+        }
+input{
+        margin-left: -10%;
+        margin-bottom: 1%;
+        }
+lable{
+           float: left;
+           margin-right : 10%;
+           width: 150px;
+           display: block;
+  		   overflow: hidden;
+        }
+input[type = submit]{
+            align-items: center;
+        }
+h1{
+        text-align : center;
+        }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
