@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Item
+from django.contrib import messages
 
 def index(request):
     items = Item.objects.all()
@@ -18,6 +19,7 @@ def edititem(request,id):
         item.image_url = image_url
         item.description = description
         item.save()
+        messages.success(request,'Details Updated')
         return redirect('/item')
     else:
         return render(request,'edititem.html',{"item":item})
@@ -30,6 +32,7 @@ def create(request):
         description = request.POST.get('description')
         item = Item(name = name, cost = cost, image_url = image_url, description = description)
         item.save()
+        messages.info(request,"New item added")
         return redirect('/item')
     else:
         return render(request,'createitem.html')
@@ -37,4 +40,5 @@ def create(request):
 def delete(request,id):
     item = Item.objects.get(id = id)
     item.delete()
+    messages.warning(request,'item deleted')
     return redirect('/item')
