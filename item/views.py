@@ -3,12 +3,14 @@ from django.http import HttpResponse
 from .models import Item
 from django.contrib import messages
 
+
 def index(request):
     items = Item.objects.all()
-    return render(request,'index.html',{"all_items":items})
+    return render(request, 'index.html', {"all_items": items})
 
-def edititem(request,id):
-    item = Item.objects.get(id = id)
+
+def edititem(request, id):
+    item = Item.objects.get(id=id)
     if request.method == "POST":
         name = request.POST.get('name')
         cost = request.POST.get('cost')
@@ -19,10 +21,11 @@ def edititem(request,id):
         item.image_url = image_url
         item.description = description
         item.save()
-        messages.success(request,'Details Updated')
-        return redirect('/item')
+        messages.success(request, 'Details Updated')
+        return redirect(index)
     else:
-        return render(request,'edititem.html',{"item":item})
+        return render(request, 'edititem.html', {"item": item})
+
 
 def create(request):
     if request.method == 'POST':
@@ -30,20 +33,28 @@ def create(request):
         cost = request.POST.get('cost')
         image_url = request.POST.get('imgurl')
         description = request.POST.get('description')
-        item = Item(name = name, cost = cost, image_url = image_url, description = description)
+        item = Item(name=name, cost=cost, image_url=image_url, description=description)
         item.save()
-        messages.info(request,"New item added")
-        return redirect('/item')
+        messages.info(request, "New item added")
+        return redirect(index)
     else:
-        return render(request,'createitem.html')
+        return render(request, 'createitem.html')
 
-def delete(request,id):
-    item = Item.objects.get(id = id)
+
+def delete(request, id):
+    item = Item.objects.get(id=id)
     item.delete()
-    messages.warning(request,'item deleted')
-    return redirect('/item')
+    messages.warning(request, 'item deleted')
+    return redirect(index)
 
 
-def itemdetails(request,id):
-    item = Item.objects.get(id= id)
-    return render(request,'itemdetails.html',{'item':item})
+def itemdetails(request, id):
+    item = Item.objects.get(id=id)
+    return render(request, 'itemdetails.html', {'item': item})
+
+
+def register(request):
+    if request.method =='POST':
+        pass
+    else:
+        return render(request, 'registration.html')
