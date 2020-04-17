@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Item
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -54,7 +55,13 @@ def itemdetails(request, id):
 
 
 def register(request):
-    if request.method =='POST':
-        pass
+    if request.method == 'POST':
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = User.objects.create_user(username = first_name+last_name,email=email,password=password)
+        user.save()
+        return redirect(index)
     else:
         return render(request, 'registration.html')
