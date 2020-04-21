@@ -9,11 +9,15 @@
       <li><a href="about">About</a></li>
       <br>
     </ul>
+    {% if user.is_authenticated %}
     <span class="navbar-text">
       <p>{{request.user}}</p>
     </span>
+    <span class="navbar-text"><a style="color:white;" href="{% url 'logout' %}">Logout</a></span>
+    {% else %}
     <span class="navbar-text">
-      <a style="color:white;" href="{% url 'logout' %}">Logout</a>
+      <a style="color:white;" href="{% url 'loginpage' %}">Login</a>
     </span>
+    {% endif %}
   </div>
 </nav>
