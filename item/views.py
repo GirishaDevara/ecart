@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from .models import Item
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+
 
 
 def index(request):
@@ -56,12 +58,31 @@ def itemdetails(request, id):
 
 def register(request):
     if request.method == 'POST':
-        first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')
+        username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = User.objects.create_user(username = first_name+last_name,email=email,password=password)
+        user = User.objects.create_user(username = username,email=email,password=password)
         user.save()
         return redirect(index)
     else:
         return render(request, 'registration.html')
+
+def loginpage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request,'Log in successful')
+            return redirect(index)
+        else:
+            messages.error(request,'Invalid User name or Password')
+            return redirect(loginpage)
+    else:
+        return render(request,'login.html')
+
+def logout_page(request):
+    logout(request)
+    messages.info(request,"successfully logged out")
+    return redirect(index)

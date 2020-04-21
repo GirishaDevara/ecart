@@ -7,6 +7,13 @@
       <li class="active"><a href="/table/">Home</a></li>
       <li><a href="contacts" >Contacts</a></li>
       <li><a href="about">About</a></li>
+      <br>
     </ul>
+    <span class="navbar-text">
+      <p>{{request.user}}</p>
+    </span>
+    <span class="navbar-text">
+      <a style="color:white;" href="{% url 'logout' %}">Logout</a>
+    </span>
   </div>
 </nav>

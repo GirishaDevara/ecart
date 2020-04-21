@@ -5,6 +5,13 @@
 		    color: #6f062a;
 		    font-family: cursive;
         }
+.layout_login{
+    width:40%;
+    margin:10vh auto 0 auto;
+    background-color:#9ca8ab30;
+    color: #6f062a;
+    font-family: cursive;
+}
 input{
         margin-left: -10%;
         margin-bottom: 1%;
@@ -22,6 +29,13 @@ input[type = submit]{
 h1{
         text-align : center;
         }
+h5{
+        color:white;
+        text-align
+        }
+p{
+        text-align:center;
+}
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
