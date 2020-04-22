@@ -1,23 +1,25 @@
 <nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">simple home page</a>
+      <a class="navbar-brand" href="{% url 'index' %}">Ecart</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/table/">Home</a></li>
-      <li><a href="contacts" >Contacts</a></li>
-      <li><a href="about">About</a></li>
-      <br>
-    </ul>
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#" >Contacts</a></li>
+      <li><a href="#">About</a></li>
     {% if user.is_authenticated %}
-    <span class="navbar-text">
-      <p>{{request.user}}</p>
-    </span>
-    <span class="navbar-text"><a style="color:white;" href="{% url 'logout' %}">Logout</a></span>
+      <li>
+        <a href="{% url 'createitem' %}">add an item</a>
+      </li>
+      <li>
+        <a href="{% url 'logout' %}">Logout</a>
+      </li>
+      <span class="navbar-text"><p>{{request.user}}</p></span>
     {% else %}
-    <span class="navbar-text">
-      <a style="color:white;" href="{% url 'loginpage' %}">Login</a>
-    </span>
+      <li>
+      <a href="{% url 'loginpage' %}">Login</a>
+      </li>
     {% endif %}
+    </ul>
   </div>
 </nav>

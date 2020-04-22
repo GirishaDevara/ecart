@@ -14,20 +14,26 @@ def index(request):
 
 def edititem(request, id):
     item = Item.objects.get(id=id)
-    if request.method == "POST":
-        name = request.POST.get('name')
-        cost = request.POST.get('cost')
-        image_url = request.POST.get('imgurl')
-        description = request.POST.get('description')
-        item.name = name
-        item.cost = cost
-        item.image_url = image_url
-        item.description = description
-        item.save()
-        messages.success(request, 'Details Updated')
-        return redirect(index)
+    user = item.user
+    if user == request.user:
+        if request.method == "POST":
+            name = request.POST.get('name')
+            cost = request.POST.get('cost')
+            image_url = request.POST.get('imgurl')
+            description = request.POST.get('description')
+            item.name = name
+            item.cost = cost
+            item.image_url = image_url
+            item.description = description
+            item.user = user
+            item.save()
+            messages.success(request, 'Details Updated')
+            return redirect(index)
+        else:
+            return render(request, 'edititem.html', {"item": item})
     else:
-        return render(request, 'edititem.html', {"item": item})
+        messages.warning(request, "permission denied")
+        return redirect(index)
 
 
 def create(request):
@@ -36,7 +42,8 @@ def create(request):
         cost = request.POST.get('cost')
         image_url = request.POST.get('imgurl')
         description = request.POST.get('description')
-        item = Item(name=name, cost=cost, image_url=image_url, description=description)
+        user = request.user
+        item = Item(name=name, cost=cost, image_url=image_url, description=description, user= user)
         item.save()
         messages.info(request, "New item added")
         return redirect(index)
@@ -46,9 +53,14 @@ def create(request):
 
 def delete(request, id):
     item = Item.objects.get(id=id)
-    item.delete()
-    messages.warning(request, 'item deleted')
-    return redirect(index)
+    user = item.user
+    if user == request.user:
+        item.delete()
+        messages.warning(request, 'item deleted')
+        return redirect(index)
+    else:
+        messages.warning(request,"permission denied")
+        return redirect(index)
 
 
 def itemdetails(request, id):
