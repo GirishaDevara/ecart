@@ -12,10 +12,10 @@
     color: #6f062a;
     font-family: cursive;
 }
-input{
+/*input{
         margin-left: -10%;
         margin-bottom: 1%;
-        }
+        }*/
 lable{
            float: left;
            margin-right : 10%;
@@ -23,6 +23,7 @@ lable{
            display: block;
   		   overflow: hidden;
         }
+
 input[type = submit]{
             align-items: center;
         }

@@ -11,7 +11,8 @@
                 <a style="item-align:center" class="btn btn-primary" href="{% url 'edit' id=item.id %}">Edit</a>
             </div>
             <div class="col-sm-6">
-                <a class="btn btn-danger" href="{% url 'delete' id=item.id %}">Delete</a>
+<!--                <a href="{{delete_url}}" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>-->
+                <a class="btn btn-danger" href="{% url 'delete' id=item.id %}" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
             </div>
           </div>
       </div>
