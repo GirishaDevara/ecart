@@ -12,3 +12,11 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+class Contact(models.Model):
+    yourname = models.CharField(max_length=255)
+    mailid = models.EmailField()
+    subject = models.CharField(max_length=1000)
+    body = models.CharField(max_length=1000)
+    def __str__(self):
+        return self.yourname
+

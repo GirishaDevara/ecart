@@ -2,7 +2,7 @@ import pdb
 
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .models import Item
+from .models import Item, Contact
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -110,6 +110,19 @@ def logout_page(request):
 
 
 def contactpage(request):
-    contact = ContactForm()
-    # pdb.set_trace()
-    return render(request, "contact.html", {'form': contact})
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            contact = Contact(mailid = request.POST.get('mailid'),yourname= request.POST.get("yourname"),
+                              subject= request.POST.get('subject'),body= request.POST.get('body'))
+
+            contact.save()
+
+            messages.success(request, "contact details submitted successfully!!")
+            return redirect(index)
+
+        else:
+            return render(request, "contact.html", {'form': form})
+    else:
+        form = ContactForm(None)
+        return render(request, "contact.html",{'form':form})
