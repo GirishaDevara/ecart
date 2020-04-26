@@ -27,12 +27,11 @@ lable{
 input[type = submit]{
             align-items: center;
         }
-h1{
+h1,#sub{
         text-align : center;
         }
 h5{
         color:white;
-        text-align
         }
 p{
         text-align:center;

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <h1>Contact</h1>
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-sm-4">Your Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="yourname">
+        </div>
+        <label class="control-label col-sm-4" >Mail Id:</label>
+        <div class="col-sm-6">
+            <input type="email" class="form-control" name="mailid">
+        </div>
+        <label class="control-label col-sm-4" >Subject:</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="subject">
+        </div>
+        <label class="control-label col-sm-4" >Body:</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  name="body">
+        </div>
+        <div class="row"></div>
+<!-- Gender-->
+        <h4 id="sub">Gender</h4>
+        <label class="control-label col-sm-4">Male</label>
+        <div class="col-sm-6">
+            <input type="radio" name="gender" value="male">
+        </div>
+        <div class="row"></div>
+        <label class="control-label col-sm-4">Female</label>
+        <div class="col-sm-6">
+            <input type="radio" name="gender" value="female">
+        </div>
+        <div class="row"></div>
+<!-- Languages -->
+        <h4 id="sub">language</h4>
+        <label class="control-label col-sm-4" >Telugu</label>
+        <div class="col-sm-6">
+            <input type="checkbox" class="custom-control-input" name="language" value="Telugu">
+        </div>
+        <div class="row"></div>
+        <label class="control-label col-sm-4">English</label>
+        <div class="col-sm-6">
+            <input type="checkbox" class="custom-control-input" name="language" value="English">
+        </div>
+        <div class="row"></div>
+        <label class="control-label col-sm-4">Hindi</label>
+        <div class="col-sm-6">
+            <input type="checkbox" class="custom-control-input" name="language" value="Hindi">
+        </div>
+<!--Country-->
+        <div class="row"></div>
+        <h4 id="sub">Country</h4>
+        <label class="control-label col-sm-4" >Select Country</label>
+        <div class="col-sm-6">
+            <select class="form-control" name="country">
+                <option>India</option>
+                <option>USA</option>
+                <option>China</option>
+            </select>
+        </div>
+        <div class="row col-sm-6 "></div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock %}

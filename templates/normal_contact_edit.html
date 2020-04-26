@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <h1>Contact</h1>
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-sm-4">Your Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="yourname" value="{{contact.yourname}}">
+        </div>
+        <label class="control-label col-sm-4" >Mail Id:</label>
+        <div class="col-sm-6">
+            <input type="email" class="form-control" name="mailid" value="{{contact.mailid}}">
+        </div>
+        <label class="control-label col-sm-4" >Subject:</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="subject" value="{{contact.subject}}">
+        </div>
+        <label class="control-label col-sm-4" >Body:</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  name=body value="{{contact.body}}">
+        </div>
+        <div class="row"></div>
+<!-- Gender-->
+        <h4 id="sub">Gender</h4>
+        <label class="control-label col-sm-4">Male</label>
+        <div class="col-sm-6">
+            <input type="radio" name="gender" value="male"{% if contact.gender == "male" %}checked{% endif %}>
+        </div>
+        <div class="row"></div>
+        <label class="control-label col-sm-4">Female</label>
+        <div class="col-sm-6">
+            <input type="radio" name="gender" value="female"{% if contact.gender == "female" %}checked{% endif %}>
+        </div>
+        <div class="row"></div>
+<!-- Languages -->
+        <h4 id="sub">language</h4>
+        <p>
+            {{ contact.language }}
+            {% for l in contact.language %}
+            {{l}}
+            {% endfor %}
+        </p>
+        <label class="control-label col-sm-4" >Telugu</label>
+        <div class="col-sm-6">
+            <input type="checkbox" class="custom-control-input" name="language" value="Telugu"{% for l in contact.language %}{% if l == "Telugu" %}checked{% endif %}{% endfor %}>
+        </div>
+        <div class="row"></div>
+        <label class="control-label col-sm-4">English</label>
+        <div class="col-sm-6">
+            <input type="checkbox" class="custom-control-input" name="language" value="English"{% for l in contact.language %}{% if l == 'English' %}checked{% endif %}{% endfor %}>
+        </div>
+        <div class="row"></div>
+        <label class="control-label col-sm-4">Hindi</label>
+        <div class="col-sm-6">
+            <input type="checkbox" class="custom-control-input" name="language" value="Hindi"{% for l in contact.language %}{% if l == 'Hindi' %}checked{% endif %}{% endfor %}>
+        </div>
+<!--Country-->
+        <div class="row"></div>
+        <h4 id="sub">Country</h4>
+        <label class="control-label col-sm-4" >Select Country</label>
+        <div class="col-sm-6">
+            <select class="form-control" name="country">
+                <option>India</option>
+                <option>USA</option>
+                <option>China</option>
+            </select>
+        </div>
+        <div class="row col-sm-6 "></div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock %}

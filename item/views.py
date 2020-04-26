@@ -108,8 +108,9 @@ def logout_page(request):
     messages.info(request, "successfully logged out")
     return redirect(index)
 
-
+'''
 def contactpage(request):
+# form example
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -124,5 +125,55 @@ def contactpage(request):
         else:
             return render(request, "contact.html", {'form': form})
     else:
-        form = ContactForm(None)
-        return render(request, "contact.html",{'form':form})
+        # contact_obj = Contact.objects.last()
+        form = ContactForm()
+        return render(request, "contact.html",{'form':form})'''
+
+"""
+def contactpage(request):
+    # model form example
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"details updated successfully")
+            return redirect(reverse('index'))
+        else:
+            form = ContactForm()
+            return render(request, "contact.html", {'form': form})
+        # import pdb;pdb.set_trace()
+    else:
+        contact_obj = Contact.objects.last()
+        form = ContactForm(instance= contact_obj)
+        return render(request, "contact.html", {'form': form})
+        """
+
+def contactpage(request):
+    if request.method == 'POST':
+        contact = Contact(mailid=request.POST.get('mailid'), yourname=request.POST.get("yourname"),
+                          subject=request.POST.get('subject'), body=request.POST.get('body'),
+                          gender=request.POST.get('gender'),language=request.POST.get('language'),
+                          country=request.POST.get('country'),)
+        contact.save()
+        messages.success(request,'contact details updated successfully!!!')
+        return redirect(reverse('index'))
+    else:
+        return render(request,'normal_contact.html',{})
+
+def contact_edit(request,id):
+    details = Contact.objects.get(id=id)
+    if request.method == 'POST':
+        details.mailid = request.POST.get('mailid')
+        details.yourname = request.POST.get("yourname")
+        details.subject = request.POST.get('subject')
+        details.body = request.POST.get('body')
+        details.gender = request.POST.get('gender')
+        details.language = request.POST.getlist('language')
+        details.country = request.POST.get('country')
+        # a = request.POST.getlist('language')
+        # import pdb; pdb.set_trace()
+        details.save()
+        messages.success(request, 'contact details updated successfully!!!')
+        return redirect(reverse('index'))
+    else:
+        return render(request, 'normal_contact_edit.html', {'contact': details})
